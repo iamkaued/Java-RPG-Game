@@ -68,7 +68,7 @@ public class Story {
         LogicController.printSeparator(30);
         System.out.println("Voce ve o enorme castelo negro a sua frente.");
         System.out.println("Enquanto voce fica em frente aos portoes, sabe que nao ha como voltar atras.");
-        System.out.println("Voce esta disfarcado como um mercenario e entra no castelo. Voce não sabe quanto tempo resta antes que alguem desconfie.");
+        System.out.println("Voce esta disfarcado como um mercenario e entra no castelo. Voce nao sabe quanto tempo resta antes que alguem desconfie.");
         System.out.println("Tudo o que voce pode fazer agora e lutar por sua vida e rezar para sair vencedor...");
         LogicController.anythingToContinue();
     }
@@ -91,16 +91,25 @@ public class Story {
         System.out.println("ATO IV - INTRODUCAO");
         LogicController.printSeparator(30);
         System.out.println("Voce entra na sala do trono do Imperador Malvado.");
-        System.out.println("Ele olha diretamente nos seus olhos. Voce sente a escuridão ao seu redor.");
+        System.out.println("Ele olha diretamente nos seus olhos. Voce sente a escuridao ao seu redor.");
         System.out.println("Ele puxa a espada sagrada da escuridao, a arma mais poderosa conhecida pelo homem.");
         System.out.println("Tudo o que voce pode fazer agora e lutar por sua vida e rezar para sair vencedor...");
         LogicController.anythingToContinue();
     }
         
-    public static void printEnd(Player player) {
+    public static void printEndWin(Player player) {
         LogicController.clearConsole();
         LogicController.printSeparator(30);
         System.out.println("Parabens, " + player.name + "! Voce derrotou o Imperador Malvado e salvou o mundo!");
+        LogicController.printSeparator(30);
+        System.out.println("Este jogo foi desenvolvido por Kaue Eduardo, APS - UNIP");
+        System.out.println("Espero que voce tenha gostado!");
+    }
+    
+    public static void prinEndLose() {
+        LogicController.clearConsole();
+        LogicController.printSeparator(30);
+        System.out.println("Infelizmente, voce morreu. O Imperador Malvado te derrotou e voce nao conseguiu salvar o mundo!");
         LogicController.printSeparator(30);
         System.out.println("Este jogo foi desenvolvido por Kaue Eduardo, APS - UNIP");
         System.out.println("Espero que voce tenha gostado!");

@@ -436,10 +436,15 @@ public class LogicController implements GameController {
 	@Override
 	public void finalBattle() {
 		// Creating the Imperado Malvado and letting the player fight against him
-		battle(new Enemy("O IMPERADO MALVADO", 300));
+		battle(new Enemy("IMPERADO MALVADO", 200));
 		
 		// Printing the proper ending
-		Story.printEnd(player);
+		if (player.hp > 0) {
+			Story.printEndWin(player);
+		} else {
+			Story.prinEndLose();
+		}
+		
 		running = false;
 	}
 	
