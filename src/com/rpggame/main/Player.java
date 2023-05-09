@@ -3,10 +3,10 @@ package com.rpggame.main;
 public class Player extends Character {
 	
 	// Integers to store number of upgrades/skills in each path
-	public int numAtkUpgrades, numDefUpgrades;
+	private int numAtkUpgrades, numDefUpgrades;
 	
 	// Additional player stats
-	int gold, restsLeft, pots;
+	private int gold, restsLeft, pots;
 
 	// Arrays to store skill names
 	public String[] atkUpgrades = {"Forca",  "Poder", "Capacidade", "Forca divina"};
@@ -33,20 +33,20 @@ public class Player extends Character {
 	// Player specific methods (more in the next part)
 	@Override
 	public int attack() {
-		return (int) (Math.random() * (xp / 4 + numAtkUpgrades * 3 + 3) + xp / 10 + numAtkUpgrades * 2 + numDefUpgrades + 1);
+		return (int) (Math.random() * (xp / 4 + getNumAtkUpgrades() * 3 + 3) + xp / 10 + getNumAtkUpgrades() * 2 + getNumDefUpgrades() + 1);
 	}
 
 	@Override
 	public int defend() {
-		return (int) (Math.random() * (xp / 4 + numDefUpgrades * 3 + 3) + xp / 10 + numDefUpgrades * 2 + numAtkUpgrades + 1);
+		return (int) (Math.random() * (xp / 4 + getNumDefUpgrades() * 3 + 3) + xp / 10 + getNumDefUpgrades() * 2 + getNumAtkUpgrades() + 1);
 	}
 	
 	// Let the player choose a trait of either skill path
 	public void chooseTrait() {
 		LogicController.clearConsole();
 		LogicController.printHeading("Escolha uma caracteristica:");
-		System.out.println("(1) " + atkUpgrades[numAtkUpgrades]);
-		System.out.println("(2) " + defUpgrades[numDefUpgrades]);
+		System.out.println("(1) " + atkUpgrades[getNumAtkUpgrades()]);
+		System.out.println("(2) " + defUpgrades[getNumDefUpgrades()]);
 		
 		// Get the players choice:
 		int input = LogicController.readInt("-> ", 2);
@@ -54,12 +54,52 @@ public class Player extends Character {
 		
 		// Deal with both cases
 		if (input == 1) {
-			LogicController.printHeading("Voce escolheu " + atkUpgrades[numAtkUpgrades] + "!");
-			numAtkUpgrades ++;
+			LogicController.printHeading("Voce escolheu " + atkUpgrades[getNumAtkUpgrades()] + "!");
+			setNumAtkUpgrades(getNumAtkUpgrades() + 1);
 		} else {
-			LogicController.printHeading("Voce escolheu " + defUpgrades[numDefUpgrades] + "!");
-			numDefUpgrades ++;
+			LogicController.printHeading("Voce escolheu " + defUpgrades[getNumDefUpgrades()] + "!");
+			setNumDefUpgrades(getNumDefUpgrades() + 1);
 		}
 		LogicController.anythingToContinue();
+	}
+
+	public int getNumAtkUpgrades() {
+		return numAtkUpgrades;
+	}
+
+	public void setNumAtkUpgrades(int numAtkUpgrades) {
+		this.numAtkUpgrades = numAtkUpgrades;
+	}
+
+	public int getNumDefUpgrades() {
+		return numDefUpgrades;
+	}
+
+	public void setNumDefUpgrades(int numDefUpgrades) {
+		this.numDefUpgrades = numDefUpgrades;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public int getRestsLeft() {
+		return restsLeft;
+	}
+
+	public void setRestsLeft(int restsLeft) {
+		this.restsLeft = restsLeft;
+	}
+
+	public int getPots() {
+		return pots;
+	}
+
+	public void setPots(int pots) {
+		this.pots = pots;
 	}
 }
