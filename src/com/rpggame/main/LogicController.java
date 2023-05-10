@@ -210,21 +210,21 @@ public class LogicController implements GameController {
 		printSeparator(20);
 		
 		// Player xp and gold
-		System.out.println("XP: " + player.xp + "\tOuro: " + player.gold);
+		System.out.println("XP: " + player.xp + "\tOuro: " + player.getGold());
 		printSeparator(20);
 		
 		// # Of pots
-		System.out.println("# de pocoes: " + player.pots);
+		System.out.println("# de pocoes: " + player.getPots());
 		printSeparator(20);
 		
 		// Printing the chosen traits
-		if (player.numAtkUpgrades > 0) {
-			System.out.println("Caracteristica Ofensiva: " + player.atkUpgrades[player.numAtkUpgrades - 1]);
+		if (player.getNumAtkUpgrades() > 0) {
+			System.out.println("Caracteristica Ofensiva: " + player.atkUpgrades[player.getNumAtkUpgrades() - 1]);
 		}
 		
 		// Printing the chosen traits
-		if (player.numDefUpgrades > 0) {
-			System.out.println("Caracteristica Defensiva: " + player.defUpgrades[player.numDefUpgrades - 1]);
+		if (player.getNumDefUpgrades() > 0) {
+			System.out.println("Caracteristica Defensiva: " + player.defUpgrades[player.getNumDefUpgrades() - 1]);
 		}
 		
 		anythingToContinue();
@@ -235,7 +235,7 @@ public class LogicController implements GameController {
 	public void shop() {
 		clearConsole();
 		printHeading("Voce encontra um estranho misterioso. \nEle oferece algo a voce:");
-		int price = (int) (Math.random() * (10 + player.pots * 3) + 10 + player.pots);
+		int price = (int) (Math.random() * (10 + player.getPots() * 3) + 10 + player.getPots());
 		System.out.println("- Pocao Magica: " + price + " ouro.");
 		printSeparator(20);
 		
@@ -247,10 +247,10 @@ public class LogicController implements GameController {
 		if (input == 1) {
 			clearConsole();
 			// Check if player has enough gold
-			if (player.gold >= price) {
+			if (player.getGold() >= price) {
 				printHeading("Voce comprou uma pocao magica por " + price + "ouro.");
-				player.pots ++;
-				player.gold -= price;
+				player.setPots(player.getPots() + 1);
+				player.setGold(player.getGold() - price);
 			} else {
 				printHeading("Voce nao possui ouro o suficiente para comprar isso...");
 			}
@@ -263,8 +263,8 @@ public class LogicController implements GameController {
 	@Override
 	public void takeRest() {
 		clearConsole();
-		if(player.restsLeft >= 1) {
-			printHeading("Voce deseja descansar? (" + player.restsLeft + " descanso(s) restante(s)).");
+		if(player.getRestsLeft() >= 1) {
+			printHeading("Voce deseja descansar? (" + player.getRestsLeft() + " descanso(s) restante(s)).");
 			System.out.println("(1) Sim\n(2) Nao, agora nao.");
 			
 			int input = readInt("-> ", 2);
@@ -280,7 +280,7 @@ public class LogicController implements GameController {
 					}
 					System.out.println("Voce descansou e recuperou ate " + hpRestored + " de vida.");
 					System.out.println("Agora voce esta com " + player.hp + "/" + player.maxHP + " de vida.");
-					player.restsLeft --;
+					player.setRestsLeft(player.getRestsLeft() - 1);
 				}
 				
 			} else {
@@ -358,10 +358,10 @@ public class LogicController implements GameController {
 			} else if (input == 2) {
 				// Use Potion
 				clearConsole();
-				if (player.pots > 0 && player.hp < player.maxHP) {
+				if (player.getPots() > 0 && player.hp < player.maxHP) {
 					// Player CAN take a potion
 					// Make sure player wants to drink the potion
-					System.out.println("Voce quer beber a pocao? (" + player.pots + " restante).");
+					System.out.println("Voce quer beber a pocao? (" + player.getPots() + " restante).");
 					System.out.println("(1) Sim\n(2) Nao, talvez mais tarde");
 					
 					input = readInt("-> ", 2);
@@ -375,12 +375,12 @@ public class LogicController implements GameController {
 						int goldEarned = (int) (Math.random() * enemy.xp);
 						
 						if (addRest) {
-							player.restsLeft ++;
+							player.setRestsLeft(player.getRestsLeft() + 1);
 							System.out.println("Voce ganhou a chance de descansar mais uma vez!");
 						}
 						
 						if (goldEarned > 0) {
-							player.gold += goldEarned;
+							player.setGold(player.getGold() + goldEarned);
 							System.out.println("Voce coletou " + goldEarned + " ouro do cadaver do " + enemy.name);
 						}
 						anythingToContinue();
